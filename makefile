@@ -3,7 +3,7 @@
 cc=gcc
 lib=-Ilibraries -Iincludes
 flags=-Wall
-objects=objects/core.o objects/renderer.o objects/prefload.o
+objects=objects/main.o objects/renderer.o objects/prefload.o
 
 params=$(flags) $(lib)
 

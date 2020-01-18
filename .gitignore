@@ -4,5 +4,8 @@ binaries
 # Compiled objects
 objects
 
+# VSCode settings
+.vscode
+
 # OS files
 .DS_Store

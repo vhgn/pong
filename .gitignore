@@ -1,5 +1,8 @@
 # Compiled binaries
 bin
 
+# Compiled objects
+obj
+
 # OS files
 .DS_Store

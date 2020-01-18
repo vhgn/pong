@@ -2,7 +2,7 @@
 
 A classical pong game with slightly configurable appearance.
 
-# Contribution
+# Development
 
 Makefile contains `debug` target for quick compile-and-run.
 Use `make` to compile and `make run` to run the default executable.

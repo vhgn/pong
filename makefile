@@ -15,10 +15,10 @@ main: $(objects)
 	@$(cc) $? -o binaries/pong
 
 obj:
-	@mkdir -p objects
+	@mkdir -p objects/tests
 
 bin:
-	@mkdir -p binaries
+	@mkdir -p binaries/tests
 
 # Helpers
 

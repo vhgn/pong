@@ -1,12 +1,12 @@
-{
-  "left": {
+[
+  {
     "top": "$",
     "middle": "#",
     "bottom": "$"
   },
-  "right": {
+  {
     "top": "+",
     "middle": ":",
     "bottom": "+"
   }
-}
+]

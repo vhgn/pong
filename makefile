@@ -1,8 +1,9 @@
 # Variables
 
 cc=gcc
-lib=-Ilib
+lib=-Ilibraries -Iincludes
 flags=-Wall
+objects=objects/core.o objects/renderer.o objects/prefload.o
 
 params=$(flags) $(lib)
 
@@ -10,26 +11,26 @@ params=$(flags) $(lib)
 
 all: obj bin main
 
-main: obj/core.o obj/renderer.o obj/prefload.o
-	@$(cc) $? -o bin/pong
+main: $(objects)
+	@$(cc) $? -o binaries/pong
 
 obj:
-	@mkdir -p obj
+	@mkdir -p objects
 
 bin:
-	@mkdir -p bin
+	@mkdir -p binaries
 
 # Helpers
 
 run:
-	@bin/pong
+	@binaries/pong
 
 debug: all run
 
 clean:
-	@rm obj/core.o obj/renderer.o bin/pong
+	@rm $(objects)
 
 # Sources
 
-obj/%.o: src/%.c
+objects/%.o: sources/%.c
 	@$(cc) $(params) -c $? -o $@

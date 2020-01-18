@@ -1,7 +1,17 @@
+# Variables
+
+cc=gcc
+lib=-Ilib
+flags=-Wall
+
+params=$(flags) $(lib)
+
+# Targets
+
 all: obj bin main
 
 main: obj/core.o obj/renderer.o
-	@gcc obj/core.o obj/renderer.o -o bin/pong
+	@$(cc) obj/core.o obj/renderer.o -o bin/pong
 
 obj:
 	@mkdir -p obj
@@ -22,7 +32,7 @@ clean:
 # Sources
 
 obj/core.o: src/core.c
-	@gcc -c src/core.c -o obj/core.o
+	@$(cc) $(params) -c src/core.c -o obj/core.o
 
 obj/renderer.o: src/renderer.c
-	@gcc -c src/renderer.c -o obj/renderer.o
+	@$(cc) $(params) -c src/renderer.c -o obj/renderer.o

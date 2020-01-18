@@ -2,7 +2,7 @@
  * 
  * LICENSE: MIT
  * 
-*/
+ */
 
 #ifndef _RENDERER
 #define _RENDERER
@@ -14,7 +14,7 @@ screen
 	 * Width of the matrix
 	 */
 	unsigned width;
-	
+
 	/** 
 	 * Height of the matrix
 	 */
@@ -28,7 +28,7 @@ screen
 
 /**
  * Screen with matrix of pixels
-*/
+ */
 typedef struct screen screen;
 
 /** 

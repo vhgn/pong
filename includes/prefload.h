@@ -39,15 +39,15 @@ appearance
 typedef struct appearance appearance;
 
 /**
- * Get player prefs matching key
-*/
+ * Get preferences of player[index]
+ */
 appearance*
 get_player_prefs
 	(unsigned index);
 
 /**
  * Load file by name and return content
-*/
+ */
 char*
 load_file
 	(char *file_name);

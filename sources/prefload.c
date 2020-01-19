@@ -25,7 +25,7 @@ get_player_prefs
 	}
 	if(t[0].type != JSMN_ARRAY)
 	{
-		printf("Failed to understand preference structure");
+		printf("%s", "Failed to understand preference structure");
 		return NULL;
 	}
 
@@ -83,7 +83,7 @@ load_file
 	fp = fopen(file_name, "r");
 	if(fp == NULL)
 	{
-		printf("Error in opening file");
+		printf("%s", "Error in opening file");
 		return NULL;
 	}
 

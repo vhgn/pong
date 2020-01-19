@@ -83,7 +83,7 @@ render_screen_matrix
 			char pixel = get_screen_index(screen_ref, i, j);
 			printf("%c", pixel);
 		}
-		printf("\n");
+		printf("%c",'\n');
 	}
 
 	return;

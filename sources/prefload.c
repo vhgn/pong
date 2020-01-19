@@ -29,13 +29,44 @@ get_player_prefs
 		return NULL;
 	}
 
+	unsigned object_index = 0,
+		array_start, array_end;
 	for(int i = 0; i <= MAX_TOKENS; i++)
 	{
-		printf("---%d---\n", i);
-		printf("%d\n", t[i].type);
-		printf("start: %d, end: %d, size: %d\n",t[i].start, t[i].start, t[i].size);
-		printf("%.*s\n", t[i + 1].end - t[i + 1].start,
-             content + t[i + 1].start);
+		if(t[i].type == JSMN_OBJECT)
+		{
+			if(object_index == index)
+			{
+				array_start = t[i].start;
+				array_end = t[i].end;
+			}
+			object_index++;
+		}
+		if
+			(t[i].start > array_start &&
+			t[i].end < array_end &&
+			t[i].type == JSMN_STRING)
+		{
+			char * tok = strndup(&content[t[i].start], t[i].end - t[i].start);
+			if(strcmp(tok, "top") == 0)
+			{
+				i++;
+				char c = content[t[i].start];
+				look->top_char = c;
+			}
+			else if(strcmp(tok, "middle") == 0)
+			{
+				i++;
+				char c = content[t[i].start];
+				look->middle_char = c;
+			}
+			else if (strcmp(tok, "bottom") == 0)
+			{
+				i++;
+				char c = content[t[i].start];
+				look->bottom_char = c;
+			}
+		}
 	}
 
 	return look;

@@ -63,7 +63,7 @@ get_screen_index
 		*col_ref;
 
 	line_ref = screen_ref->matrix +
-		line_num * screen_ref->height;
+		line_num * screen_ref->width;
 	
 	col_ref = line_ref + col_num;
 
@@ -83,7 +83,7 @@ render_screen_matrix
 			char pixel = get_screen_index(screen_ref, i, j);
 			printf("%c", pixel);
 		}
-		printf("%c",'\n');
+		printf("%c", '\n');
 	}
 
 	return;

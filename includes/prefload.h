@@ -9,6 +9,9 @@
 
 #define MAX_TOKENS 16
 
+/**
+ * Player appearance
+ */
 struct
 appearance
 {
@@ -34,14 +37,9 @@ appearance
 };
 
 /**
- * Player appearance
- */
-typedef struct appearance appearance;
-
-/**
  * Get preferences of player[index]
  */
-appearance*
+struct appearance*
 get_player_prefs
 	(unsigned index);
 

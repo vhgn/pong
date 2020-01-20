@@ -3,7 +3,7 @@
 cc=gcc
 lib=-Ilibraries -Iincludes
 flags=-Wall
-objects=objects/main.o objects/renderer.o objects/prefload.o
+objects=$(shell ls -p sources | grep -v / | sed -e s/.c//g | while read name; do echo objects/$$name.o; done < /dev/stdin | paste -sd ' ' -)
 
 params=$(flags) $(lib)
 

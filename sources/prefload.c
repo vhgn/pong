@@ -6,11 +6,11 @@
 
 #include "prefload.h"
 
-appearance*
+struct appearance*
 get_player_prefs
 	(unsigned index)
 {
-	appearance *look = malloc(7);
+	struct appearance *look = malloc(7);
 	char *content = load_file("prefs.json");
 	int r;
 	jsmn_parser p;

@@ -3,13 +3,13 @@
 
 #include "renderer.h"
 	
-screen*
+struct screen*
 init_screen
 	(unsigned width,
 	unsigned height,
 	char pixel)
 {
-	screen *screen_ref;
+	struct screen *screen_ref;
 	
 	screen_ref = malloc
 		(sizeof width +
@@ -36,7 +36,7 @@ init_screen
 
 void
 set_screen_index
-	(screen *screen_ref,
+	(struct screen *screen_ref,
 	unsigned line_num,
 	unsigned col_num,
 	char pixel)
@@ -55,7 +55,7 @@ set_screen_index
 
 char
 get_screen_index
-	(screen *screen_ref,
+	(struct screen *screen_ref,
 	unsigned line_num,
 	unsigned col_num)
 {
@@ -72,7 +72,7 @@ get_screen_index
 
 void
 render_screen_matrix
-	(screen *screen_ref)
+	(struct screen *screen_ref)
 {
 	for
 		(int i = 0; i < screen_ref->height; i++)

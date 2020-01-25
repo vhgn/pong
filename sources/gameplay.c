@@ -9,7 +9,7 @@
 void
 calculate_frame
 	(int delta,
-	int input)
+	char input)
 {
 	if(input == '1')
 	{
@@ -51,13 +51,26 @@ start_gameplay
 	struct timeval this_frame, prev_frame;
 	gettimeofday(&prev_frame, NULL);
 
+	left = malloc(sizeof(struct player));
+	left->height = 0u;
+	left->length = 2u;
+	left->look = malloc(sizeof(struct appearance));
+	left->look = left_player;
+
+	right = malloc(sizeof(struct player));
+	right->height = 0u;
+	right->length = 2u;
+	right->look = malloc(sizeof(struct appearance));
+	right->look = right_player;
+	
 	int total_delayed;
+
+	int input;
 
 	while(1)
 	{
 		gettimeofday(&this_frame, NULL);
 
-		int input = 0;
 		if(_kbhit())
 		{
 			input = fgetc(stdin);
@@ -75,11 +88,13 @@ start_gameplay
 		if(total_delayed > delay)
 		{
 			calculate_frame(diff, input);
+			clear_screen(screen, ' ');
 			render_player(left, screen, 0);
 			render_player(right, screen, 1);
 			system("clear");
 			render_screen_matrix(game_screen);
 			total_delayed = 0;
+			input = 0;
 		}
 
 		gettimeofday(&prev_frame, NULL);

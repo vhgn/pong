@@ -42,7 +42,7 @@ struct player *right;
 void
 calculate_frame
 	(int delta,
-	int input);
+	char input);
 
 /**
  * Start game loop with artificial delay for stable fps

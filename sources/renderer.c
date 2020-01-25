@@ -12,26 +12,34 @@ init_screen
 	struct screen *screen_ref;
 	
 	screen_ref = malloc
-		(sizeof width +
-		sizeof height +
-		sizeof pixel * width * height);
+		(sizeof(struct screen));
 	
 	screen_ref->width = width;
 	screen_ref->height = height;
 
-	screen_ref->matrix = malloc(width * height);
+	screen_ref->matrix = malloc((size_t) width * height);
 
+	clear_screen(screen_ref, pixel);
+
+	return screen_ref;
+}
+
+void
+clear_screen
+	(struct screen *screen,
+	char pixel)
+{
 	for
-		(unsigned i = 0; i < height; i++)
+		(unsigned i = 0; i < screen->height; i++)
 	{
 		for
-			(unsigned j = 0; j < width; j++)
+			(unsigned j = 0; j < screen->width; j++)
 		{
-			set_screen_index(screen_ref, i, j, pixel);
+			set_screen_index(screen, i, j, pixel);
 		}
 	}
 
-	return screen_ref;
+	return;	
 }
 
 void

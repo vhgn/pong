@@ -39,6 +39,14 @@ init_screen
 	char pixel);
 
 /**
+ * Clear the screen filling with specified pixels
+*/
+void
+clear_screen
+	(struct screen *screen,
+	char pixel);
+
+/**
  * Set the screen's [line_num][col_num] to pixel
  */
 void

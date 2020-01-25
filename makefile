@@ -4,7 +4,7 @@ cc=gcc
 lib=-Ilibraries -Iincludes
 flags=-Wall
 objects=$(shell ls -p sources | grep -v / | sed -e s/.c//g | while read name; do echo objects/$$name.o; done < /dev/stdin | paste -sd ' ' -)
-
+includes=$(shell ls -p includes | grep -v / | while read name; do echo includes/$$name; done < /dev/stdin | paste -sd ' ' -)
 params=$(flags) $(lib)
 
 # Targets
@@ -32,5 +32,5 @@ clean:
 
 # Sources
 
-objects/%.o: sources/%.c
-	@$(cc) $(params) -c $? -o $@
+objects/%.o: sources/%.c $(includes)
+	@$(cc) $(params) -c $< -o $@

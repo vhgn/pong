@@ -4,8 +4,8 @@
  * 
  */
 
-#ifndef _PREFLOAD
-#define _PREFLOAD
+#ifndef _PREFLOAD_H
+#define _PREFLOAD_H
 
 #define MAX_TOKENS 16
 

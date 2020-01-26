@@ -1,12 +1,13 @@
 #include <curses.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <math.h>
 #include <sys/time.h>
 
 #include "gameplay.h"
 #include "kbhit.h"
 
-void
+int
 calculate_frame
 	(int delta,
 	char input)
@@ -39,6 +40,22 @@ calculate_frame
 			right->height--;
 		}
 	}
+	double new_x = ball->pos_x + ball->vel_x,
+		new_y = ball->pos_y + ball->vel_y;
+
+	if(new_y < 0 || new_y >= screen->height)
+	{
+		ball->vel_y *= -1;
+	}
+	if(new_x < 0 || new_x >= screen->width)
+	{
+		return 1;
+	}
+
+	ball->pos_x = new_x;
+	ball->pos_y = new_y;
+
+	return 0;
 }
 
 void
@@ -50,6 +67,8 @@ start_gameplay
 {
 	struct timeval this_frame, prev_frame;
 	gettimeofday(&prev_frame, NULL);
+
+	srand(prev_frame.tv_sec);
 
 	left = malloc(sizeof(struct player));
 	left->height = 0u;
@@ -63,6 +82,16 @@ start_gameplay
 	right->look = malloc(sizeof(struct appearance));
 	right->look = right_player;
 	
+	ball = malloc(sizeof(struct ball));
+	ball->pos_x = (screen->width - 1) / 2;
+	ball->pos_y = (screen->height - 1) / 2;
+
+	int degrees = rand() % 90 - 45;
+	double radians = degrees * M_PI / 180;
+	
+	ball->vel_x = cos(radians) * INITIAL_SPEED;
+	ball->vel_y = sin(radians) * INITIAL_SPEED;
+
 	int total_delayed;
 
 	int input;
@@ -87,10 +116,14 @@ start_gameplay
 
 		if(total_delayed > delay)
 		{
-			calculate_frame(diff, input);
+			if(calculate_frame(diff, input) != 0)
+			{
+				break;
+			}
 			clear_screen(screen, ' ');
 			render_player(left, screen, 0);
 			render_player(right, screen, 1);
+			render_ball(ball, screen);
 			system("clear");
 			render_screen_matrix(game_screen);
 			total_delayed = 0;
@@ -134,4 +167,16 @@ render_player
 		player->look->bottom_char);
 
 	return;
+}
+
+void
+render_ball
+	(struct ball *ball,
+	struct screen *screen)
+{
+	set_screen_index
+		(screen,
+		(unsigned) ball->pos_y,
+		(unsigned) ball->pos_x,
+		'o');
 }

@@ -47,9 +47,23 @@ calculate_frame
 	{
 		ball->vel_y *= -1;
 	}
-	if(new_x < 0 || new_x >= screen->width)
+	if(new_x < -1 || new_x > screen->width)
 	{
 		return 1;
+	}
+
+	if((unsigned) new_x <= 1 &&
+		left->height <= new_y &&
+		left->height + left->length + 1 >= new_y)
+	{
+		ball->vel_x *= -1;
+	}
+
+	if((unsigned) new_x >= screen->width - 2 &&
+		right->height <= new_y &&
+		right->height + right->length + 1 >= new_y)
+	{
+		ball->vel_x *= -1;	
 	}
 
 	ball->pos_x = new_x;
@@ -88,7 +102,7 @@ start_gameplay
 
 	int degrees = rand() % 90 - 45;
 	double radians = degrees * M_PI / 180;
-	
+
 	ball->vel_x = cos(radians) * INITIAL_SPEED;
 	ball->vel_y = sin(radians) * INITIAL_SPEED;
 
@@ -118,6 +132,7 @@ start_gameplay
 		{
 			if(calculate_frame(diff, input) != 0)
 			{
+				system("clear");
 				break;
 			}
 			clear_screen(screen, ' ');

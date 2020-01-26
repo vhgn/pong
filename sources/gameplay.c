@@ -52,16 +52,19 @@ calculate_frame
 		return 1;
 	}
 
-	if((unsigned) new_x <= 1 &&
-		left->height <= new_y &&
-		left->height + left->length + 1 >= new_y)
+	unsigned x = round(new_x),
+		y = round(new_y);
+
+	if(x <= 0 &&
+		left->height <= y &&
+		left->height + left->length + 1 >= y)
 	{
 		ball->vel_x *= -1;
 	}
 
-	if((unsigned) new_x >= screen->width - 2 &&
-		right->height <= new_y &&
-		right->height + right->length + 1 >= new_y)
+	if((unsigned) x >= screen->width - 1 &&
+		right->height <= y &&
+		right->height + right->length + 1 >= y)
 	{
 		ball->vel_x *= -1;	
 	}
@@ -119,6 +122,7 @@ start_gameplay
 			input = fgetc(stdin);
 			if(input == 127) /* delete key */
 			{
+				system("clear");
 				break;
 			}
 		}
@@ -136,9 +140,9 @@ start_gameplay
 				break;
 			}
 			clear_screen(screen, ' ');
+			render_ball(ball, screen);
 			render_player(left, screen, 0);
 			render_player(right, screen, 1);
-			render_ball(ball, screen);
 			system("clear");
 			render_screen_matrix(game_screen);
 			total_delayed = 0;

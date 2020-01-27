@@ -1,4 +1,4 @@
-#include "prefload.c"
+#include "prefload.h"
 
 #test _get_player_prefs
 	struct appearance *left = get_player_prefs(0);

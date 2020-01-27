@@ -1,0 +1,7 @@
+#include "renderer.h"
+
+#test _set_screen_index
+	struct screen *screen = init_screen(10, 10, ' ');
+    char pixel = 'P';
+    set_screen_index(screen, 3, 7, pixel);
+    fail_unless(get_screen_index(screen, 3, 7) == pixel, "get set characters don't match");

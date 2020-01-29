@@ -16,7 +16,7 @@ all: obj bin main
 test: bin obj bintest runtest
 
 main: $(objects)
-	@$(cc) $? -o binaries/pong
+	@$(cc) $? -o binaries/pong -lm
 
 bintest: $(checks)
 	@checkmk $? | cat $(sources) - | $(cc) -x c $(params) -lcheck -Isources -o binaries/test -

@@ -19,7 +19,7 @@ main: $(objects)
 	@$(cc) $? -o binaries/pong -lm
 
 bintest: $(checks)
-	@checkmk $? | cat $(sources) - | $(cc) -x c $(params) -lcheck -Isources -o binaries/test -
+	@checkmk $? | cat $(sources) - | $(cc) -x c $(params) -Isources -o binaries/test - -lcheck
 
 runtest:
 	@binaries/test

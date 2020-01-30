@@ -19,5 +19,6 @@ main
 	right = get_player_prefs(1);
 	start_gameplay(screen, left, right, 1000 / FPS);
 	
+	exit_renderer();
 	return 0;
 }

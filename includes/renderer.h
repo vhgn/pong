@@ -72,4 +72,11 @@ void
 render_screen_matrix
 	(struct screen *screen_ref);
 
+/**
+ * Exits program and resets terminal attributes
+ */
+void
+exit_renderer
+	(void);
+
 #endif

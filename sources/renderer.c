@@ -1,5 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <termios.h>
+#include <sys/ioctl.h>
+#include <sys/select.h>
 
 #include "renderer.h"
 	
@@ -95,4 +98,17 @@ render_screen_matrix
 	}
 
 	return;
+}
+
+void
+exit_renderer
+	(void)
+{
+		static const int STDIN = 0;
+		struct termios term;
+		tcgetattr(STDIN, &term);
+		term.c_lflag |= ICANON;
+		term.c_lflag |= ECHO;
+		tcsetattr(STDIN, TCSANOW, &term);
+		exit(0);
 }

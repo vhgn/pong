@@ -4,8 +4,8 @@ cc=gcc
 lib=-Iinc
 flags=-Wall
 objects=$(shell ls -p src | grep -v / | sed -e s/.c//g | while read name; do echo obj/$$name.o; done < /dev/stdin | paste -sd ' ' -)
-sources=$(shell ls -p src/tests | grep -v / | sed -e s/.check//g | while read name; do echo src/$$name.c; done < /dev/stdin | paste -sd ' ' -)
-checks=$(shell ls -p src/tests | grep -v / | while read name; do echo sources/tests/$$name; done < /dev/stdin | paste -sd ' ' -)
+sources=$(shell ls -p src/tst | grep -v / | sed -e s/.check//g | while read name; do echo src/$$name.c; done < /dev/stdin | paste -sd ' ' -)
+checks=$(shell ls -p src/tst | grep -v / | while read name; do echo src/tst/$$name; done < /dev/stdin | paste -sd ' ' -)
 includes=$(shell ls -p inc | grep -v / | while read name; do echo inc/$$name; done < /dev/stdin | paste -sd ' ' -)
 params=$(flags) $(lib)
 
@@ -16,10 +16,10 @@ all: obj bin main
 test: bin obj bintest runtest
 
 main: $(objects)
-	@$(cc) $? -o binaries/pong -lm
+	@$(cc) $? -o bin/pong -lm
 
 bintest: $(checks)
-	@checkmk $? | cat $(sources) - | $(cc) -x c $(params) -Isources -o binaries/test - -lcheck
+	@checkmk $? | cat $(sources) - | $(cc) -x c $(params) -Isrc -o bin/test - -lcheck
 
 runtest:
 	@bin/test

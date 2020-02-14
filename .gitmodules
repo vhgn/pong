@@ -1,6 +1,3 @@
-[submodule "libraries/jsmn"]
-	path = libraries/jsmn
+[submodule "inc/jsmn"]
+	path = inc/jsmn
 	url = https://github.com/zserge/jsmn
-[submodule "libraries/check"]
-	path = libraries/check
-	url = https://github.com/libcheck/check

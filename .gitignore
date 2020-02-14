@@ -1,8 +1,8 @@
 # Compiled binaries
-binaries
+bin
 
 # Compiled objects
-objects
+obj
 
 # VSCode settings
 .vscode

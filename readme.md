@@ -11,7 +11,7 @@ git submodule init
 git submodule update
 ```
 
-Compile `check` in the `libraries` folder and install it on your machine for tests (see details in its own readme).
+Compile `check` and install it on your machine for tests (see details in its own readme).
 Makefile contains `debug` target for quick compile-and-run.
 Use `make test` to compile tests and run.
 Use `make` to compile and `make run` to run the default executable, or use the quick alias `make debug`.

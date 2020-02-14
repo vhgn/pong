@@ -1,12 +1,12 @@
 # Variables
 
 cc=gcc
-lib=-Ilibraries -Iincludes
+lib=-Iinc
 flags=-Wall
-objects=$(shell ls -p sources | grep -v / | sed -e s/.c//g | while read name; do echo objects/$$name.o; done < /dev/stdin | paste -sd ' ' -)
-sources=$(shell ls -p sources/tests | grep -v / | sed -e s/.check//g | while read name; do echo sources/$$name.c; done < /dev/stdin | paste -sd ' ' -)
-checks=$(shell ls -p sources/tests | grep -v / | while read name; do echo sources/tests/$$name; done < /dev/stdin | paste -sd ' ' -)
-includes=$(shell ls -p includes | grep -v / | while read name; do echo includes/$$name; done < /dev/stdin | paste -sd ' ' -)
+objects=$(shell ls -p src | grep -v / | sed -e s/.c//g | while read name; do echo obj/$$name.o; done < /dev/stdin | paste -sd ' ' -)
+sources=$(shell ls -p src/tests | grep -v / | sed -e s/.check//g | while read name; do echo src/$$name.c; done < /dev/stdin | paste -sd ' ' -)
+checks=$(shell ls -p src/tests | grep -v / | while read name; do echo sources/tests/$$name; done < /dev/stdin | paste -sd ' ' -)
+includes=$(shell ls -p inc | grep -v / | while read name; do echo inc/$$name; done < /dev/stdin | paste -sd ' ' -)
 params=$(flags) $(lib)
 
 # Targets
@@ -22,18 +22,18 @@ bintest: $(checks)
 	@checkmk $? | cat $(sources) - | $(cc) -x c $(params) -Isources -o binaries/test - -lcheck
 
 runtest:
-	@binaries/test
+	@bin/test
 
 obj:
-	@mkdir -p objects/tests
+	@mkdir -p obj/tests
 
 bin:
-	@mkdir -p binaries
+	@mkdir -p bin
 
 # Helpers
 
 run:
-	@binaries/pong
+	@bin/pong
 
 debug: all run
 
@@ -42,5 +42,5 @@ clean:
 
 # Sources
 
-objects/%.o: sources/%.c $(includes)
+obj/%.o: src/%.c $(includes)
 	@$(cc) $(params) -c $< -o $@

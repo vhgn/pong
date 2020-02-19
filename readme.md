@@ -15,5 +15,3 @@ Compile `check` and install it on your machine for tests (see details in its own
 Makefile contains `debug` target for quick compile-and-run.
 Use `make test` to compile tests and run.
 Use `make` to compile and `make run` to run the default executable, or use the quick alias `make debug`.
-
-*Please follow the [ctyle](https://github.com/vhgn/ctyle) guide.*

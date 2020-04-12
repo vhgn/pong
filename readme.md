@@ -2,16 +2,19 @@
 
 A classical pong game with slightly configurable appearance.
 
+# Play
+
+**TLDR** Run `make`.
+
+Use `make` command to initialize submodules, update them, compile and run the game.
+
 # Development
 
 Make sure you initiated and updated the submodules.
 
-```shell
+```sh
 git submodule init
 git submodule update
 ```
 
-Compile `check` and install it on your machine for tests (see details in its own readme).
-Makefile contains `debug` target for quick compile-and-run.
-Use `make test` to compile tests and run.
-Use `make` to compile and `make run` to run the default executable, or use the quick alias `make debug`.
+Makefile contains `all` target for a quick compile-and-run.

@@ -1,11 +1,5 @@
-# Compiled binaries
 bin
-
-# Compiled objects
 obj
 
-# VSCode settings
 .vscode
-
-# OS files
 .DS_Store

@@ -1,46 +1,35 @@
-# Variables
+name = pong
+includes = $(wildcard inc/*)
+sourcefiles = $(wildcard src/*)
+sources = $(sourcefiles:%.c=obj/%.o)
 
-cc=gcc
-lib=-Iinc
-flags=-Wall
-objects=$(shell ls -p src | grep -v / | sed -e s/.c//g | while read name; do echo obj/$$name.o; done < /dev/stdin | paste -sd ' ' -)
-sources=$(shell ls -p src/tst | grep -v / | sed -e s/.check//g | while read name; do echo src/$$name.c; done < /dev/stdin | paste -sd ' ' -)
-checks=$(shell ls -p src/tst | grep -v / | while read name; do echo src/tst/$$name; done < /dev/stdin | paste -sd ' ' -)
-includes=$(shell ls -p inc | grep -v / | while read name; do echo inc/$$name; done < /dev/stdin | paste -sd ' ' -)
-params=$(flags) $(lib)
+compiler = gcc
+flags = -Iinc -std=c89 -pedantic -Wall
 
-# Targets
+quick: sub all
 
-all: obj bin main
+sub:	
+	git submodule init
+	git submodule update
 
-test: bin obj bintest runtest
+all: obj bin run
 
-main: $(objects)
-	@$(cc) $? -o bin/pong -lm
+obj: obj/src
 
-bintest: $(checks)
-	@checkmk $? | cat $(sources) - | $(cc) -x c $(params) -Isrc -o bin/test - -lcheck
-
-runtest:
-	@bin/test
-
-obj:
-	@mkdir -p obj/tests
+obj/%:
+	mkdir -p $@
 
 bin:
-	@mkdir -p bin
+	mkdir -p $@
 
-# Helpers
-
-run:
-	@bin/pong
-
-debug: all run
+run: bin/$(name)
+	$<
 
 clean:
-	@rm $(objects)
+	rm -f $(sources) bin/$(name)
 
-# Sources
+bin/$(name): $(sources)
+	$(compiler) -o $@ $^
 
-obj/%.o: src/%.c $(includes)
-	@$(cc) $(params) -c $< -o $@
+obj/src/%.o: src/%.c $(includes)
+	$(compiler) -o $@ -c $< $(flags)

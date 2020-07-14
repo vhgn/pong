@@ -1,12 +1,6 @@
-/**
- Linux (POSIX) implementation of _kbhit().
- Morgan McGuire, morgan@casual-effectcs.com
- */
+#ifndef KBHIT_H
+#define KBHIT_H
 
-#ifndef _KBHIT_H
-#define _KBHIT_H
+int _kbhit();
 
-int
-_kbhit();
-
-#endif
+#endif /* KBHIT_H */
